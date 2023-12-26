@@ -36,7 +36,7 @@ namespace JC.Samples.ServerManagerConsoleDemo.Services
         public Site GetSite(string siteName)
         {
             Log.Verbose("Getting site named: {0}", siteName);
-            
+
             Site site = _server.Sites.FirstOrDefault(s => s.Name.Equals(siteName, StringComparison.OrdinalIgnoreCase));
 
             if (site != null)
@@ -143,6 +143,21 @@ namespace JC.Samples.ServerManagerConsoleDemo.Services
             }
 
             return stopped;
+        }
+
+        /// <summary>
+        /// Starts the site with the specified name, if it is not already running.
+        /// </summary>
+        /// <param name="siteName">The site name</param>
+        /// <returns>True if the site was started successfully, otherwise false</returns>
+        public bool ReStartSite(string siteName)
+        {
+            Site site = GetSite(siteName);
+
+            if (site == null) return false;
+            StopSite(siteName);
+            bool started = StartSite(siteName);
+            return started;
         }
 
         #region Implements IDisposable

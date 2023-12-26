@@ -14,6 +14,7 @@ namespace JC.Samples.ServerManagerConsoleDemo.Services.Interfaces
         bool SiteIsRunning(string siteName);
         bool StartSite(string siteName);
         bool StopSite(string siteName);
+        bool ReStartSite(string siteName);
 
         #endregion
     }
